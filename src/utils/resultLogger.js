@@ -23,8 +23,8 @@
  */
 
 const STORAGE_KEY = 'neuroguard_game_results';
-const USER_ID     = 'U001';   // Replace with real auth when available
-const BACKEND_URL = 'http://127.0.0.1:5000/api/results';
+const USER_ID = 'U001';   // Replace with real auth when available
+const BACKEND_URL = 'https://neuroguard-backend-1.onrender.com/api/results';
 
 /**
  * saveResultToBackend(result) — sends the result object to the Python Flask backend.
@@ -68,17 +68,17 @@ function buildResult({ difficulty, mode = 'animals', difficultyLevel, pairsMatch
     : 0;
 
   return {
-    user_id:          USER_ID,
-    game_type:        'memory_matching',
+    user_id: USER_ID,
+    game_type: 'memory_matching',
     difficulty,
     mode,
-    score:            pairsMatched,
+    score: pairsMatched,
     accuracy,
-    time_taken:       Math.round(timeTaken),
+    time_taken: Math.round(timeTaken),
     difficulty_level: difficultyLevel,
     attempts,
-    mistakes:         Math.max(0, attempts - pairsMatched),
-    timestamp:        new Date().toISOString(),
+    mistakes: Math.max(0, attempts - pairsMatched),
+    timestamp: new Date().toISOString(),
   };
 }
 
@@ -95,21 +95,21 @@ function buildResult({ difficulty, mode = 'animals', difficultyLevel, pairsMatch
  */
 function buildSequenceResult({ score, difficultyLevel, attempts, mistakes, timeTaken }) {
   const correctTaps = attempts - mistakes;
-  const accuracy    = attempts > 0
+  const accuracy = attempts > 0
     ? Math.round((correctTaps / attempts) * 1000) / 10
     : 0;
 
   return {
-    user_id:          USER_ID,
-    game_type:        'sequence_recall',
-    difficulty:       'adaptive',
+    user_id: USER_ID,
+    game_type: 'sequence_recall',
+    difficulty: 'adaptive',
     score,
     accuracy,
-    time_taken:       Math.round(timeTaken),
+    time_taken: Math.round(timeTaken),
     difficulty_level: difficultyLevel,
     attempts,
     mistakes,
-    timestamp:        new Date().toISOString(),
+    timestamp: new Date().toISOString(),
   };
 }
 
@@ -130,16 +130,16 @@ function buildPatternResult({ score, difficultyLevel, attempts, mistakes, timeTa
     : 0;
 
   return {
-    user_id:          USER_ID,
-    game_type:        'pattern_recognition',
-    difficulty:       'progressive',
+    user_id: USER_ID,
+    game_type: 'pattern_recognition',
+    difficulty: 'progressive',
     score,
     accuracy,
-    time_taken:       Math.round(timeTaken),
+    time_taken: Math.round(timeTaken),
     difficulty_level: difficultyLevel,
     attempts,
     mistakes,
-    timestamp:        new Date().toISOString(),
+    timestamp: new Date().toISOString(),
   };
 }
 
