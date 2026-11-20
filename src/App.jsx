@@ -29,17 +29,17 @@ function App() {
   return (
     <div id="app">
       {/* NEW BACK TO DASHBOARD BUTTON (Fixed to top left) */}
-      <a 
-        href="http://localhost:5000" 
+      <a
+        href="https://neuro-guard-frontend-dashboard.vercel.app/"
         style={{
           position: 'fixed',
           top: '20px',
           left: '20px',
           zIndex: 9999, // Ensures it stays above all games
-          padding: '10px 20px', 
-          backgroundColor: '#E8E3D9', 
-          color: '#3B3A39', 
-          textDecoration: 'none', 
+          padding: '10px 20px',
+          backgroundColor: '#E8E3D9',
+          color: '#3B3A39',
+          textDecoration: 'none',
           borderRadius: '8px',
           fontWeight: 'bold',
           fontFamily: 'sans-serif',
