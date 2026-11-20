@@ -1,0 +1,697 @@
+/* =========================================================
+   NeuroGuard — memoryGame.css
+   Game-specific styles: start screen, board, cards, header,
+   win overlay. All animations are calm and reduced-motion-safe.
+   ========================================================= */
+
+/* ---- App Shell ---- */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 68px);
+  margin-top: 68px;
+  padding: var(--space-md);
+}
+
+/* ========================================================
+   START SCREEN
+   ======================================================== */
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 68px);
+  margin-top: 68px;
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  gap: var(--space-lg);
+}
+
+.start-screen__logo-mark {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.start-screen__title {
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.start-screen__subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.start-screen__instruction {
+  font-size: 1rem;
+  color: var(--accent-sage);
+  font-style: italic;
+  margin-top: calc(-1 * var(--space-sm));
+}
+
+.start-screen__difficulties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  width: 100%;
+  max-width: 760px;
+}
+
+/* Mode selection options */
+.start-screen__modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  justify-content: center;
+  width: 100%;
+  max-width: 680px;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-md);
+  min-width: 250px;
+  max-width: 310px;
+  flex: 1 1 250px;
+  background: white;
+  border: 2px solid var(--border-warm);
+  border-radius: 20px;
+  box-shadow: var(--shadow-gentle);
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal),
+              border-color var(--transition-normal);
+  cursor: pointer;
+}
+
+.mode-card:hover,
+.mode-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-gold);
+  outline: none;
+}
+
+.mode-card__icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.mode-card__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.mode-card__badge--personal {
+  background: #F8EFE4;
+  color: #8C4A2F;
+}
+
+.mode-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.mode-card__desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Back button to switch mode */
+.start-screen__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1.5px solid var(--border-warm);
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: calc(-1 * var(--space-xs));
+}
+
+.start-screen__back-btn:hover,
+.start-screen__back-btn:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--accent-gold);
+  background: #FDF8EE;
+  outline: none;
+}
+
+/* Difficulty selection cards */
+.difficulty-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  min-width: 200px;
+  min-height: 140px;
+  background: white;
+  border: 2px solid var(--border-warm);
+  border-radius: 16px;
+  box-shadow: var(--shadow-gentle);
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal),
+              border-color var(--transition-normal);
+  cursor: pointer;
+}
+
+.difficulty-btn:hover,
+.difficulty-btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-gold);
+  outline: none;
+}
+
+.difficulty-btn:active {
+  transform: translateY(0);
+}
+
+.difficulty-btn__icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.difficulty-btn__label {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.difficulty-btn__meta {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.difficulty-btn--easy   { --btn-accent: #3E5C4B; }
+.difficulty-btn--medium { --btn-accent: #D4A24C; }
+.difficulty-btn--hard   { --btn-accent: #8C4A2F; }
+
+.difficulty-btn--easy:hover,
+.difficulty-btn--easy:focus-visible   { border-color: #3E5C4B; }
+.difficulty-btn--medium:hover,
+.difficulty-btn--medium:focus-visible { border-color: #D4A24C; }
+.difficulty-btn--hard:hover,
+.difficulty-btn--hard:focus-visible   { border-color: #8C4A2F; }
+
+/* ========================================================
+   GAME HEADER (top bar)
+   ======================================================== */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  box-shadow: var(--shadow-gentle);
+  margin-bottom: var(--space-md);
+}
+
+.game-header__stats {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.stat-item__value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-item__label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.game-header__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--border-warm);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  min-height: 44px;
+  transition: border-color var(--transition-fast),
+              color var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.header-btn:hover,
+.header-btn:focus-visible {
+  border-color: var(--accent-gold);
+  color: var(--text-primary);
+  background: #FDF8EE;
+  outline: none;
+}
+
+/* ========================================================
+   GAME BOARD
+   ======================================================== */
+.game-board {
+  display: grid;
+  gap: clamp(10px, 2vw, 18px);
+  justify-content: center;
+  /* max-width keeps cards from getting absurdly large on big screens */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-sm) 0 var(--space-lg);
+  /* Fade-in on load */
+  animation: boardFadeIn 500ms ease both;
+}
+
+@keyframes boardFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Column layouts per difficulty */
+.game-board--easy   { grid-template-columns: repeat(3, 1fr); max-width: 540px; }
+.game-board--medium { grid-template-columns: repeat(4, 1fr); max-width: 720px; }
+.game-board--hard   { grid-template-columns: repeat(5, 1fr); max-width: 860px; }
+
+/* ========================================================
+   CARD
+   ======================================================== */
+.card {
+  /* 3D perspective lives on the outer container */
+  perspective: 1000px;
+  /* Sizing: square aspect ratio */
+  aspect-ratio: 1 / 1;
+  /* Min touch target */
+  min-width: 80px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 14px;
+}
+
+.card:focus-visible .card__inner {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* The flipping inner element */
+.card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--transition-flip);
+  border-radius: 14px;
+}
+
+/* Flipped state */
+.card--flipped .card__inner,
+.card--matched .card__inner {
+  transform: rotateY(180deg);
+}
+
+/* Common face styles */
+.card__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* --- Card BACK --- */
+.card__back {
+  background: var(--card-back);
+  box-shadow: var(--shadow-gentle);
+  transition: box-shadow var(--transition-fast);
+}
+
+/* Decorative back pattern using CSS pseudo-elements (leaf / mandala-inspired circles) */
+.card__back::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 28%, transparent 28%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 48%, transparent 48%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 12%, transparent 12%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 12%, transparent 12%),
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 12%, transparent 12%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 12%, transparent 12%);
+  border-radius: 14px;
+}
+
+.card__back-icon {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  opacity: 0.55;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover: lift the card slightly when it's face-down and not matched */
+.card:not(.card--matched):hover .card__back,
+.card:not(.card--matched):focus-visible .card__back {
+  box-shadow: var(--shadow-hover);
+}
+
+/* --- Card FRONT --- */
+.card__front {
+  background: var(--card-face);
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 0.4em;
+  box-shadow: var(--shadow-gentle);
+  border: 1.5px solid var(--border-warm);
+}
+
+.card__image {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.card__emoji-fallback {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+
+.card__name {
+  font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: center;
+  letter-spacing: 0.03em;
+  padding: 0 4px;
+}
+
+/* --- Matched state --- */
+.card--matched {
+  cursor: default;
+  pointer-events: none;
+}
+
+.card--matched .card__front {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-matched);
+  /* Calm warm pulse */
+  animation: matchedPulse 1.8s ease-in-out 1;
+}
+
+@keyframes matchedPulse {
+  0%   { box-shadow: var(--shadow-matched); }
+  40%  { box-shadow: 0 0 0 6px var(--accent-gold-light), 0 4px 24px rgba(212, 162, 76, 0.4); }
+  100% { box-shadow: var(--shadow-matched); }
+}
+
+/* --- Fading-out state (card disappears after matched glow) --- */
+/*
+ * .card--fading-out is applied ~600ms after a match, once the warm pulse
+ * has registered. The card gently scales down, blurs, and fades away.
+ * visibility:hidden is set via animation-fill-mode so the card slot is
+ * still occupied (no grid jump), but the card is invisible and inert.
+ */
+.card--fading-out {
+  cursor: default;
+  pointer-events: none;
+  animation: cardFadeOut 700ms cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes cardFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  60% {
+    opacity: 0.3;
+    transform: scale(0.88);
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(3px);
+    visibility: hidden;
+  }
+}
+
+/* ========================================================
+   WIN SCREEN (overlay)
+   ======================================================== */
+.win-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--space-md);
+  animation: overlayFadeIn 400ms ease both;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.win-card {
+  background: var(--card-face);
+  border-radius: 20px;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(58, 46, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  animation: winCardSlideIn 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes winCardSlideIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.win-card__emblem {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.win-card__title {
+  color: var(--text-primary);
+}
+
+.win-card__message {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 380px;
+  line-height: 1.7;
+}
+
+.win-card__stats {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  width: 100%;
+}
+
+.win-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.win-stat__value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.win-stat__label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.win-card__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Primary action button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  background: var(--card-back);
+  color: var(--text-on-dark);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 52px;
+  min-width: 160px;
+  border: 2px solid transparent;
+  transition: background var(--transition-normal), transform var(--transition-fast);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #7A3F27;
+  transform: translateY(-2px);
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Secondary action button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-warm);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 52px;
+  min-width: 160px;
+  transition: border-color var(--transition-normal),
+              background var(--transition-normal),
+              transform var(--transition-fast);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--accent-gold);
+  background: #FDF8EE;
+  transform: translateY(-2px);
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* ========================================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================================== */
+@media (max-width: 600px) {
+  .game-board--medium { grid-template-columns: repeat(4, 1fr); }
+  .game-board--hard   { grid-template-columns: repeat(4, 1fr); }
+
+  .game-header__stats {
+    gap: var(--space-md);
+  }
+
+  .start-screen__difficulties {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .difficulty-btn {
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 400px) {
+  .game-board--medium { grid-template-columns: repeat(3, 1fr); }
+  .game-board--hard   { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ========================================================
+   REDUCED MOTION — override all animations & transitions
+   ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .card__inner {
+    transition: none;
+  }
+  .game-board {
+    animation: none;
+  }
+  .win-overlay,
+  .win-card {
+    animation: none;
+  }
+  .card--matched .card__front {
+    animation: none;
+  }
+  /* Skip the fade-out animation; jump straight to invisible */
+  .card--fading-out {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

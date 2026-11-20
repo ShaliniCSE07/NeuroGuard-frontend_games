@@ -1,0 +1,15 @@
+[
+  {
+    "user_id": "demo-user-001",
+    "game_type": "memory_matching",
+    "difficulty": "easy",
+    "mode": "animals",
+    "score": 3,
+    "accuracy": 100,
+    "time_taken": 5,
+    "difficulty_level": 1,
+    "attempts": 3,
+    "mistakes": 0,
+    "timestamp": "2026-11-18T19:23:33.425Z"
+  }
+]

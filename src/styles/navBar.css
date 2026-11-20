@@ -1,0 +1,124 @@
+/* =========================================================
+   NeuroGuard — navBar.css
+   Fixed top navigation bar.
+   Warm cream background, deep brown text, gentle bottom border.
+   ========================================================= */
+
+/* ---- Navbar shell ---- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0 var(--space-lg);
+  height: 68px;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-warm);
+  box-shadow: 0 2px 12px rgba(58, 46, 42, 0.07);
+}
+
+/* ---- Brand button ---- */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  background: none;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar__brand:hover {
+  opacity: 0.78;
+}
+
+.navbar__brand-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.navbar__brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* ---- Nav link list ---- */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Individual nav link ---- */
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 1.05rem;      /* ≥18px at base 18px */
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.navbar__link:hover {
+  color: var(--text-primary);
+  background: rgba(58, 46, 42, 0.06);
+}
+
+/* Active / current page */
+.navbar__link--active {
+  color: var(--text-primary);
+  background: rgba(212, 162, 76, 0.18);
+  position: relative;
+}
+
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;         /* flush with navbar's bottom border */
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 2.5px;
+  background: var(--accent-gold);
+  border-radius: 2px;
+}
+
+/* ---- Mobile: collapse nav text ---- */
+@media (max-width: 540px) {
+  .navbar {
+    padding: 0 var(--space-md);
+    height: 60px;
+  }
+
+  .navbar__brand-name {
+    font-size: 1.2rem;
+  }
+
+  .navbar__link {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.65rem;
+  }
+}

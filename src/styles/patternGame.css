@@ -1,0 +1,386 @@
+/* =========================================================
+   NeuroGuard — patternGame.css
+   Styles for Game 3: Attention & Pattern Recognition.
+   Warm, earthy, dementia-friendly aesthetics.
+   Large touch targets, calm visual feedback, no harsh flashing.
+   ========================================================= */
+
+.pattern-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 68px);
+  margin-top: 68px; /* space for fixed navbar */
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  width: 100%;
+}
+
+/* ---- Subheader / Stats Header ---- */
+.pattern-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  box-shadow: var(--shadow-gentle);
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: var(--space-md);
+}
+
+.pattern-header__stats {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pattern-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.pattern-stat__value {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.pattern-stat__label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.pattern-instruction-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+}
+
+.pattern-target-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #C4624D; /* target terracotta color */
+  box-shadow: 0 0 6px rgba(196, 98, 77, 0.4);
+}
+
+/* ---- Start Screen ---- */
+.pattern-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 580px;
+  padding: var(--space-xl) var(--space-md);
+  gap: var(--space-md);
+  margin: auto 0;
+  animation: patFadeIn 400ms ease both;
+}
+
+.pattern-start__icon {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.pattern-start__title {
+  color: var(--text-primary);
+}
+
+.pattern-start__instruction {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.pattern-start__legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--card-face);
+  border: 1.5px solid var(--border-warm);
+  border-radius: 16px;
+  margin: var(--space-xs) 0;
+}
+
+.pattern-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.pattern-legend-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.pattern-legend-swatch--target {
+  background: #C4624D;
+  box-shadow: 0 0 0 3px rgba(196, 98, 77, 0.2);
+}
+
+.pattern-legend-swatch--distractor {
+  background: #94A89A;
+  box-shadow: 0 0 0 3px rgba(148, 168, 154, 0.2);
+}
+
+.pattern-start__tip {
+  font-size: 0.95rem;
+  color: var(--accent-sage);
+  font-style: italic;
+}
+
+/* ---- Arena & Grid ---- */
+.pattern-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.pattern-grid {
+  display: grid;
+  gap: clamp(14px, 2.5vw, 22px);
+  justify-content: center;
+  align-content: center;
+  padding: var(--space-lg);
+  background: var(--card-face);
+  border: 2px solid var(--border-warm);
+  border-radius: 24px;
+  box-shadow: var(--shadow-gentle);
+  width: 100%;
+  min-height: 380px;
+  animation: patFadeIn 350ms ease both;
+}
+
+/* Dynamic columns based on level grid size */
+.pattern-grid--12 { grid-template-columns: repeat(4, 1fr); max-width: 520px; }
+.pattern-grid--16 { grid-template-columns: repeat(4, 1fr); max-width: 520px; }
+.pattern-grid--20 { grid-template-columns: repeat(5, 1fr); max-width: 620px; }
+.pattern-grid--24 { grid-template-columns: repeat(6, 1fr); max-width: 680px; }
+
+/* ---- Shape Buttons ---- */
+.pattern-shape {
+  aspect-ratio: 1 / 1;
+  min-width: 64px;
+  min-height: 64px;
+  width: 100%;
+  border-radius: 50%; /* soft circle */
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal),
+              opacity var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+  position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pattern-shape:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Distractor shape (calm soft sage green) */
+.pattern-shape--distractor {
+  background: #94A89A;
+  box-shadow: 0 4px 12px rgba(148, 168, 154, 0.35);
+}
+
+.pattern-shape--distractor:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(148, 168, 154, 0.45);
+}
+
+/* Target shape (warm high-contrast terracotta/amber) */
+.pattern-shape--target {
+  background: #C4624D;
+  box-shadow: 0 4px 14px rgba(196, 98, 77, 0.4);
+}
+
+.pattern-shape--target:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 98, 77, 0.5);
+}
+
+/* Correct target tapped: scales up and gently disappears */
+.pattern-shape--collected {
+  animation: targetCollect 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes targetCollect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.18);
+    opacity: 0.85;
+    box-shadow: 0 0 20px rgba(212, 162, 76, 0.6);
+  }
+  100% {
+    transform: scale(0.65);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Wrong shape tapped: gentle wobble and slight dimming */
+.pattern-shape--wobble {
+  animation: gentleWobble 450ms ease;
+  opacity: 0.55 !important;
+  cursor: default;
+}
+
+@keyframes gentleWobble {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(3px); }
+}
+
+/* Level Intermission Banner */
+.pattern-transition-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card-face);
+  border: 2px solid var(--accent-gold);
+  border-radius: 18px;
+  padding: var(--space-md) var(--space-xl);
+  box-shadow: 0 12px 36px rgba(58, 46, 42, 0.2);
+  text-align: center;
+  z-index: 10;
+  animation: patPopIn 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.pattern-transition-banner h3 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pattern-transition-banner p {
+  color: var(--accent-sage);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+@keyframes patPopIn {
+  from { opacity: 0; transform: translate(-50%, -40%) scale(0.92); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ---- Well Done / Win Screen ---- */
+.pattern-win-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--space-md);
+  animation: overlayFadeIn 400ms ease both;
+}
+
+.pattern-win-card {
+  background: var(--card-face);
+  border-radius: 20px;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(58, 46, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  animation: winCardSlideIn 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pattern-win-card__emblem {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.pattern-win-card__title {
+  color: var(--text-primary);
+}
+
+.pattern-win-card__desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.pattern-win-card__stats {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  width: 100%;
+}
+
+@keyframes patFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .pattern-grid--20,
+  .pattern-grid--24 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-grid,
+  .pattern-shape,
+  .pattern-shape--collected,
+  .pattern-shape--wobble,
+  .pattern-transition-banner {
+    animation: none;
+    transition: none;
+  }
+}

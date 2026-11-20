@@ -1,0 +1,452 @@
+/* =========================================================
+   NeuroGuard — sequenceGame.css
+   Styles for Game 2: Sequence Recall.
+   Calm, warm, high-contrast, large touch-friendly targets.
+   ========================================================= */
+
+.sequence-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 68px);
+  margin-top: 68px; /* space for fixed navbar */
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  width: 100%;
+}
+
+/* ---- Subheader / Stats Header ---- */
+.sequence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  box-shadow: var(--shadow-gentle);
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: var(--space-lg);
+}
+
+.sequence-header__stats {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.sequence-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 65px;
+}
+
+.sequence-stat__value {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.sequence-stat__label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* Mistakes indicators */
+.sequence-mistakes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mistake-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border-warm);
+  background: transparent;
+  transition: all var(--transition-normal);
+}
+
+.mistake-dot--used {
+  background: #C4624D; /* gentle warm terracotta/red */
+  border-color: #C4624D;
+  box-shadow: 0 0 6px rgba(196, 98, 77, 0.4);
+}
+
+/* ---- Start Screen ---- */
+.sequence-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 580px;
+  padding: var(--space-xl) var(--space-md);
+  gap: var(--space-md);
+  margin: auto 0;
+  animation: seqFadeIn 400ms ease both;
+}
+
+.sequence-start__icon {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.sequence-start__title {
+  color: var(--text-primary);
+}
+
+.sequence-start__instruction {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.sequence-start__tip {
+  font-size: 0.95rem;
+  color: var(--accent-sage);
+  font-style: italic;
+  margin-top: -0.2rem;
+}
+
+/* ---- Arena (Container for Countdown, Sequence Display, and Keypad) ---- */
+.sequence-arena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 540px;
+  min-height: 440px;
+  background: var(--card-face);
+  border: 2px solid var(--border-warm);
+  border-radius: 24px;
+  box-shadow: var(--shadow-gentle);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ---- Ready / Countdown ---- */
+.sequence-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.sequence-countdown__prompt {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.sequence-countdown__num {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  animation: countdownPulse 950ms ease-in-out infinite;
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+/* ---- Number Display (Showing Sequence) ---- */
+.sequence-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  width: 100%;
+  gap: var(--space-sm);
+}
+
+.sequence-display__label {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sequence-display__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  background: white;
+  border: 3px solid var(--accent-gold);
+  border-radius: 20px;
+  box-shadow: var(--shadow-matched);
+  margin: var(--space-sm) 0;
+}
+
+.sequence-display__number {
+  font-family: var(--font-heading);
+  font-size: 80px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  animation: numFadeIn 300ms ease both;
+}
+
+.sequence-display__blank {
+  width: 32px;
+  height: 4px;
+  background: var(--border-warm);
+  border-radius: 2px;
+}
+
+@keyframes numFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- Input State & Sequence Progress Tracker ---- */
+.sequence-input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: var(--space-md);
+  animation: seqFadeIn 350ms ease both;
+}
+
+.sequence-input__prompt {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Dots showing progress of sequence being entered */
+.sequence-slots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: var(--space-xs);
+}
+
+.sequence-slot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px dashed var(--border-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  background: white;
+  transition: all var(--transition-fast);
+}
+
+.sequence-slot--filled {
+  border-style: solid;
+  border-color: var(--accent-gold);
+  background: #FDF8EE;
+  box-shadow: 0 0 0 2px var(--accent-gold-light);
+}
+
+/* ---- Number Pad (Keypad) ---- */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.keypad__btn {
+  aspect-ratio: 1 / 1;
+  min-height: 72px;
+  background: white;
+  border: 2px solid var(--border-warm);
+  border-radius: 16px;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-gentle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast),
+              background var(--transition-fast),
+              border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.keypad__btn:hover,
+.keypad__btn:focus-visible {
+  border-color: var(--accent-gold);
+  background: #FDF8EE;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  outline: none;
+}
+
+.keypad__btn:active {
+  transform: translateY(1px);
+}
+
+/* Zero button placed in center column of row 4 */
+.keypad__btn--zero {
+  grid-column: 2;
+}
+
+/* Button Pulse Feedback on Tap */
+.keypad__btn--correct {
+  background: #E8F3EB !important; /* calm warm green */
+  border-color: #4C825B !important;
+  color: #2F593B !important;
+  box-shadow: 0 0 0 4px rgba(76, 130, 91, 0.3) !important;
+  animation: pulseCorrect 500ms ease;
+}
+
+.keypad__btn--wrong {
+  background: #FCECE9 !important; /* calm soft coral */
+  border-color: #C4624D !important;
+  color: #8C3927 !important;
+  box-shadow: 0 0 0 4px rgba(196, 98, 77, 0.3) !important;
+  animation: pulseWrong 500ms ease;
+}
+
+@keyframes pulseCorrect {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulseWrong {
+  0%   { transform: scale(1); }
+  25%  { transform: translateX(-4px); }
+  75%  { transform: translateX(4px); }
+  100% { transform: scale(1); }
+}
+
+/* Feedback banners */
+.sequence-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-top: var(--space-xs);
+  animation: seqFadeIn 300ms ease both;
+}
+
+.sequence-feedback--success {
+  background: #EAF3EB;
+  color: #2E5B3A;
+  border: 1px solid #B8D8BE;
+}
+
+.sequence-feedback--error {
+  background: #FDF0ED;
+  color: #8C3B29;
+  border: 1px solid #ECC6BE;
+}
+
+/* ---- Game Over Screen ---- */
+.sequence-gameover {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--space-md);
+  animation: overlayFadeIn 400ms ease both;
+}
+
+.sequence-gameover__card {
+  background: var(--card-face);
+  border-radius: 20px;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(58, 46, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  animation: winCardSlideIn 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sequence-gameover__emblem {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.sequence-gameover__title {
+  color: var(--text-primary);
+}
+
+.sequence-gameover__desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.sequence-gameover__stats {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Animations */
+@keyframes seqFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sequence-countdown__num,
+  .sequence-display__number,
+  .sequence-input-section,
+  .sequence-start,
+  .keypad__btn--correct,
+  .keypad__btn--wrong {
+    animation: none;
+  }
+}
